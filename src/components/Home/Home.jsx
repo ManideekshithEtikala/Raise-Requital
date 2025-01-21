@@ -1,15 +1,20 @@
 import BuinessModel from './BuinessModel';
+import Companies from './Companies';
+import Footer from './Footer';
 import Head from './Head'
 import { Navbar } from './Navbar'
-import mainImage from "/Users/manideekshith/Desktop/Manideekshith/MERN stack projects/RaiseRequital/frontend/raiserequital/src/assets/mainimage.png";
+import UserReviews from './UserReviews';
 const Home = () => {
   return (
         <>
-    <div style={{backgroundImage:`url(${mainImage})`}}>
+    <div >
         <Navbar/>
         <Head/>
     </div>
     <BuinessModel/>
+    <UserReviews/>
+    <Companies/>
+    <Footer/>
     </>
   )
 }

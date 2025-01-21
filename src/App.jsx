@@ -8,19 +8,16 @@ import Home from "./components/Home/Home";
 function App() {
   return (
     <>
-    <UserProvider>
-    <BrowserRouter>
-    <div className="absolute top-0 z-[-2] h-screen w-screen bg-white bg-[radial-gradient(100%_50%_at_50%_0%,rgba(0,163,255,0.13)_0,rgba(0,163,255,0)_50%,rgba(0,163,255,0)_100%)]">
-    <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-          </Routes>
-    </div>
-      </BrowserRouter>
-    </UserProvider>
+      <UserProvider>
+        <BrowserRouter>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/signup" element={<Signup />} />
+              </Routes>
+        </BrowserRouter>
+      </UserProvider>
     </>
   );
 }
-
 export default App;
