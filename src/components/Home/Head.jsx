@@ -24,7 +24,7 @@ const Head = () => {
             {text} <span className="text-5xl">needs bold</span>bilievers
           </motion.p>
           <div className="flex justify-end mr-10 mt-20">
-            <button className="bg-blue-800 px-3 py-1 rounded-md text-white flex justify-center items-center mx-4">Entrepreneur
+            <button className="bg-black hover:bg-gray-800 px-3 py-1 rounded-md text-white flex justify-center items-center mx-4">Entrepreneur
             <FaArrowRight className="text-white mx-2 w-4"/>
             </button>
           </div>
@@ -39,8 +39,8 @@ const Head = () => {
             Discover <span>Start Ups</span>
             <span className="text-4xl ">that are changing</span>the game!.
           </motion.p>
-          <div className="flex justify-end mr-10">
-            <button className="bg-blue-800 text-white px-5 py-1 rounded-md flex justify-center items-center mx-4">Investor
+          <div className="flex justify-end mr-10 mt-2">
+            <button className="bg-black hover:bg-gray-800 text-white px-5 py-1 rounded-md flex justify-center items-center mx-4">Investor
             <FaArrowRight className="text-white mx-2 w-4"/>
             </button>
           </div>
