@@ -1,14 +1,24 @@
 import { Link } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
-import { useContext, useState } from 'react'
-import { UserContext } from '../Authentication/UserContext'
+import { useContext, useState } from "react";
+import { UserContext } from "../Authentication/UserContext";
 import { googleLogout } from "@react-oauth/google";
 export const Navbar = () => {
-  const { user } = useContext(UserContext)
-  const [userlogin,setUserLogin] =useState(user?.email_verified)
-  
+  const { user } = useContext(UserContext);
+  const [userlogin, setUserLogin] = useState(user?.email_verified);
+  const [dropdownVisible, setDropdownVisible] = useState(false);
+
+  const toggleDropdown = () => {
+    setDropdownVisible(!dropdownVisible);
+  };
+
+  const handleLogout = () => {
+    googleLogout();
+    setUserLogin(false);
+    setDropdownVisible(false);
+  };
+
   return (
-    
     <>
       <div className="flex justify-between bg-blue-900 py-5 px-5 bg-transparent text-brown-800 ">
         <div className="flex items-center justify-between">
@@ -34,17 +44,42 @@ export const Navbar = () => {
             <FaSearch className="rounded-lg mr-1 w-6 h-6 text-gray-400 flex items-center justify-center hover:cursor-pointer" />
           </div>
           <div>
-            {userlogin?(
+            {userlogin ? (
               <div>
-                <img src={user?.picture} onClick={()=>{googleLogout()
-                  setUserLogin(false)
-                }} alt="profile image" className="rounded-full w-8 h-8"/>
-              </div>
-            ):<Link to={"/login"} className="p-2 rounded-md cursor-pointer transition duration-4000 ease-in-out">
-            <span className="text-gray-800 hover:text-gray-900 hover:underline">Login</span>
-          </Link>
-            }
-            
+              <img
+                src={user?.picture}
+                onClick={toggleDropdown}
+                alt="profile image"
+                className="rounded-full w-8 h-8 cursor-pointer"
+              />
+              {dropdownVisible && (
+                <div className="absolute right-0 mt-2 w-48 bg-white border rounded-md shadow-lg">
+                  <button
+                    onClick={handleLogout}
+                    className="block px-4 py-2 text-gray-800 hover:bg-gray-100 w-full text-left rounded-md"
+                  >
+                    Logout
+                  </button>
+                  <Link
+                    to="/profile"
+                    className="block px-4 py-2 text-gray-800 hover:bg-gray-100 rounded-md"
+                  >
+                    Profile
+                  </Link>
+                  {/* Add more dropdown items here */}
+                </div>
+              )}
+            </div>
+            ) : (
+              <Link
+                to={"/login"}
+                className="p-2 rounded-md cursor-pointer transition duration-4000 ease-in-out"
+              >
+                <span className="text-gray-800 hover:text-gray-900 hover:underline">
+                  Login
+                </span>
+              </Link>
+            )}
           </div>
         </div>
       </div>
