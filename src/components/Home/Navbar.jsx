@@ -34,7 +34,7 @@ export const Navbar = () => {
         {/* Explore and search functionalities */}
         <div className="flex justify-end items-center w-full">
           <div className="flex justify-center items-center">
-            <span className="mx-2 cursor-pointer">Explore</span>
+            <span className="mx-2 cursor-pointer"><Link to={'/Entrepreneur'}>Explore</Link></span>
           </div>
           <div className="flex items-center rounded-md justify-around mx-4 bg-white text-sm">
             <input

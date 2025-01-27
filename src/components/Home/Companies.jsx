@@ -12,9 +12,9 @@ const Companies = () => {
         </motion.p>
         <div className="grid grid-cols-5 gap-2 justify-items-center mt-16">
           {
-            companies.map((company) => (
+            companies.map((company,ind) => (
               <>
-              <div className="flex justify-center  items-center w-28 h-28 ">
+              <div className="flex justify-center  items-center w-28 h-28 " key={ind}>
                 <motion.img
                 whileInView={{scale:1}}
                 initial={{scale:0}}

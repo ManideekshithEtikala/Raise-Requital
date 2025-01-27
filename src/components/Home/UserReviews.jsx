@@ -1,10 +1,10 @@
 import { Carousel } from "@material-tailwind/react";
 import { Typography, Avatar } from "@material-tailwind/react";
 import{Rate} from 'antd';
-import { userReview } from "../../../backend/Data";
+import { userReviews } from "../../../backend/Data";
 
 const UserReviews = () => {
-  const reviews = userReview || [];
+  const reviews = userReviews || [];
 console.log(reviews)
   return (
     <>
