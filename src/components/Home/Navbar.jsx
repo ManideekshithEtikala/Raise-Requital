@@ -1,17 +1,21 @@
 import { Link } from "react-router-dom";
-import { FaSearch } from "react-icons/fa";
-import { useContext, useState } from "react";
+import { useContext, useState ,useEffect } from "react";
 import { UserContext } from "../Authentication/UserContext";
 import { googleLogout } from "@react-oauth/google";
 export const Navbar = () => {
   const { user } = useContext(UserContext);
   const [userlogin, setUserLogin] = useState(user?.email_verified);
   const [dropdownVisible, setDropdownVisible] = useState(false);
-
+  console.log(user?.picture)
+  
+  useEffect(() => {
+    setUserLogin(user?.email_verified);
+  }, [user]); 
+  
   const toggleDropdown = () => {
     setDropdownVisible(!dropdownVisible);
   };
-
+  
   const handleLogout = () => {
     googleLogout();
     setUserLogin(false);
@@ -36,18 +40,11 @@ export const Navbar = () => {
           <div className="flex justify-center items-center">
             <span className="mx-2 cursor-pointer"><Link to={'/Entrepreneur'}>Explore</Link></span>
           </div>
-          <div className="flex items-center rounded-md justify-around mx-4 bg-white text-sm">
-            <input
-              className="px-2 py-1 mx-2 rounded-md outline-none bg-transparent text-gray-800"
-              placeholder="Search your category"
-            />
-            <FaSearch className="rounded-lg mr-1 w-6 h-6 text-gray-400 flex items-center justify-center hover:cursor-pointer" />
-          </div>
           <div>
             {userlogin ? (
-              <div>
+              <div className="relative">
               <img
-                src={user?.picture}
+                src={user.picture}
                 onClick={toggleDropdown}
                 alt="profile image"
                 className="rounded-full w-8 h-8 cursor-pointer"

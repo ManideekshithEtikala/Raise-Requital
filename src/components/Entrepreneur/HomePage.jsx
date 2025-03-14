@@ -1,9 +1,18 @@
-import UserDetials from './UserDetials/UserDetials'
+import React, { useState } from 'react';
+import BusinessDataShow from "./components/BusinessDataShow"
+import NavbarE from "./components/NavbarE"
+
 
 const HomePage = () => {
+  const [selectedCategory, setSelectedCategory] = useState("");
+
+  const handleCategoryChange = (category) => {
+    setSelectedCategory(category);
+  };
   return (
     <>
-    <div>hmoepageof Entrepreneur</div>
+    <NavbarE onCategoryChange={handleCategoryChange}/>
+    <BusinessDataShow category={selectedCategory}/>
     </>
   )
 }

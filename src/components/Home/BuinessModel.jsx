@@ -13,9 +13,8 @@ const BuinessModel = () => {
          {/* business models */}
          {
            Data.map((model) => (
-            <>
             <div
-            className="max-w-sm bg-gray-50 border border-gray-300 rounded-lg shadow">
+            className="max-w-sm bg-gray-50 border border-gray-300 rounded-lg shadow" key={model.id}>
               <a href="#" className="flex items-center justify-center" key={model.id}>
                 <img
                   className="rounded-t-lg mt-1"
@@ -54,7 +53,6 @@ const BuinessModel = () => {
                 </a>
               </div>
             </div>
-            </>
            ))
          }
         </div>

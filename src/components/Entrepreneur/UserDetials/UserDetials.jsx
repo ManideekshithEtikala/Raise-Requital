@@ -1,11 +1,10 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState,useContext, useEffect } from "react";
 import axios from "axios";
 import { UserContext } from "../../Authentication/UserContext.jsx"; // Adjust the path as necessary
 const UserDetials = () => {
   const navigate=useNavigate();
 const [title,setTitle]=useState('');
-const [imageUrl,setImageUrl]=useState('');
 const [businessModel,setBusinessModel]=useState('');
 const [description,setDescription]=useState('');
 const [fundingReqDescription,setFundingReqDescription]=useState('');
@@ -18,6 +17,17 @@ const [financialPlan,setFinancialPlan]=useState('');
 const [team,setTeam]=useState('');
 const {user}=useContext(UserContext);
 const [loading,setLoading] = useState(false);
+const [imageUrl, setImageUrl] = useState(null);
+
+    // Handle Image Selection
+    const handleImageChange = (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            const url = URL.createObjectURL(file); // Generate Temporary URL
+            setImageUrl(url);
+            console.log(url)
+        }
+    };
 useEffect(() => {
   if (!user) {
     navigate("/login");
@@ -28,7 +38,7 @@ const handleSubmit = async (e) => {
   e.preventDefault();
   setLoading(true);
   const data = {
-    userId:user.clientId,
+    userId:user?.clientId,
     title:title,
     imageUrl:imageUrl,
     businessModel:businessModel,
@@ -109,34 +119,42 @@ const handleSubmit = async (e) => {
                         ImageUrl
                       </label>
                       <input
-                        type="url"
+                        type="file"
                         name="imageUrl"
                         id="imageUrl"
-                        placeholder="Image URL"
+                        placeholder="Select Image File"
                         className="bg-gray-50 border outline-none border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         required=""
-                        onChange={(e)=>setImageUrl(e.target.value)}
+                        accept="image/*"
+                        onChange={handleImageChange}
                       />
                     </div>
                     {/* Business Model */}
                     <div className="col-span-2">
-                      <label
-                        htmlFor="businessModel"
-                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                        
-                      >
-                        BusinessModel
-                      </label>
-                      <textarea
-                        name="businessModel"
-                        id="businessModel"
-                        placeholder="Describe your business model"
-                        className="bg-gray-50 border outline-none border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        rows="4"
-                        onChange={(e)=>setBusinessModel(e.target.value)}
-                        required=""
-                      ></textarea>
-                    </div>
+  <label
+    htmlFor="businessModel"
+    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+  >
+    Business Model
+  </label>
+  <select
+    name="businessModel"
+    id="businessModel"
+    className="bg-gray-50 border outline-none border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+    onChange={(e) => setBusinessModel(e.target.value)}
+    required
+  >
+    <option value="" disabled selected>Select your business model</option>
+    <option value="jewelry">Jewelry</option>
+    <option value="clothing">Clothing</option>
+    <option value="fashion">Fashion</option>
+    <option value="accessories">Accessories</option>
+    <option value="techProducts">TechProducts</option>
+    <option value="sports">Sports</option>
+    <option value="electronics">Electronics</option>
+    <option value="">None</option>
+  </select>
+</div>
                     {/* Description */}
                     <div className="col-span-2">
                       <label
@@ -306,6 +324,7 @@ const handleSubmit = async (e) => {
                         onChange={(e)=>setFinancialPlan(e.target.value)}    
                       ></textarea>
                     </div>
+                    
                   </div>
                   <div className="flex items-center justify-between">
 

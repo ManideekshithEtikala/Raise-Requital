@@ -90,19 +90,19 @@ export const companies = [
 export const Data = [
     {
         id:1,
-        ImageUrl:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9",
+        ImageUrl:"https://i.ytimg.com/vi/Qo84sV_6THY/maxresdefault.jpg",
         Title:"Amazon",
         Description:"Amazon.com, Inc. is an American multinational technology company which focuses on e-commerce, cloud computing, digital streaming, and artificial intelligence.",
     },
     {
         id:2,
-        ImageUrl:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd10",
+        ImageUrl:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQo3RA43_e0Euvts2nof4_1-4dTVAXnyu0RQ&s",
         Title:"Google",
         Description:"Google is an American multinational technology company that specializes in Internet-related services and products, which include online advertising technologies, a search engine, cloud computing, software, and hardware.",
     },
     {
         id:3,
-        ImageUrl:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd11",
+        ImageUrl:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxqIJXqJFXbU9woLQe6Omh3mYGLZtoIhhMRg&s",
         Title:"Haier",
         Description:"Haier is a Chinese multinational manufacturer of home appliances, including refrigerators, washing machines, and air conditioners.",
     }

@@ -21,7 +21,7 @@ const businessSchema = new mongoose.Schema({
   productAndServices: { type: String, required: true },
   marketingAndSalesStrategy: { type: String, required: true },
   financialPlan: { type: String, required: true },
-  teamDetails: { type: String, required: true }
+  teamDetails: { type: String, required: true },
 });
 
 const Business = EnterpreneurData.model('Business', businessSchema);
