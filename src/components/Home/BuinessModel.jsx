@@ -7,17 +7,17 @@ const BuinessModel = () => {
             whileInView={{opacity:1,y:0}}
             initial={{opacity:0,y:-50}}
              transition={{duration:1}} className="flex flex-col justify-center items-center mt-16 ">
-        <h1 className="text-5xl mb-4">Business Models</h1>
-        <div className="flex justify-around items-center gap-6">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl mb-4 font-serif text-gray-900">Business Models</h1>
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
 
          {/* business models */}
          {
            Data.map((model) => (
             <div
-            className="max-w-sm bg-gray-50 border border-gray-300 rounded-lg shadow" key={model.id}>
+            className="bg-gray-50 border border-gray-300 rounded-lg shadow" key={model.id}>
               <a href="#" className="flex items-center justify-center" key={model.id}>
                 <img
-                  className="rounded-t-lg mt-1"
+                  className="rounded-t-lg mt-1 w-fit h-fit sm:w-[300px] sm:h-fit md:w-[300px] md:h-fit object-cover"
                   src={model.ImageUrl}
                   alt=""
                 />

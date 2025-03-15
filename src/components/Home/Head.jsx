@@ -1,6 +1,7 @@
 import { Link } from "react-router";
 import { motion } from "framer-motion";
 import { FaArrowRight } from "react-icons/fa";
+
 const Head = () => {
   const text = "Big Ideas";
   const container = (delay) => ({
@@ -11,47 +12,54 @@ const Head = () => {
       transition: { duration: 1.5, delay: delay },
     },
   });
+
   return (
     <>
-      <div className=" flex h-[90vh]">
-        <div className="w-full flex flex-col justify-center">
+      <div className="flex flex-col sm:flex-row h-[80vh] md:h-[90vh]">
+        <div className="w-full flex flex-col justify-center items-center ">
           <motion.p
             variants={container(0)}
             initial="hidden"
             animate="visible"
-            className="text-[7rem] text-black flex flex-col justify-center font-serif items-center mt-18 font-bold"
+            className="text-4xl sm:text-[3.5rem] md:text-[4.5rem] lg:text-[6rem] text-blue-gray-900 flex flex-col justify-center font-serif items-center mt-10 font-bold text-center "
           >
-            {text} <span className="text-5xl">needs bold</span>bilievers
+            {text} <span className="text-2xl md:text-4xl sm:text-3xl py-1 md:py-6 lg:py-10">needs bold</span> believers
           </motion.p>
-          <motion.div 
-          variants={container(0)}
-          initial="hidden"
-          animate="visible"className="flex justify-end mr-10 mt-20">
-            <button className="bg-black hover:bg-gray-800 px-3 py-1 rounded-md text-white flex justify-center items-center mx-4"><Link to={'/Entrepreneur/Details'} >Entrepreneur</Link>
-            <FaArrowRight className="text-white mx-2 w-4"/>
+          <motion.div
+            variants={container(0)}
+            initial="hidden"
+            animate="visible"
+            className="flex justify-center md:justify-end w-full sm:my-5 md:mt-20 mb-5 mt-2"
+          >
+            <button className="text-sm sm:text-md bg-gray-700 hover:bg-gray-900 px-3 py-1 rounded-md text-white flex justify-center items-center mx-2">
+              <Link to={'/Entrepreneur/Details'}>Entrepreneur</Link>
+              <FaArrowRight className="text-white mx-2 w-4" />
             </button>
           </motion.div>
         </div>
-        <div className="w-full">
+        <div className="w-full flex flex-col justify-center items-center ">
           <motion.p
             variants={container(0)}
             initial="hidden"
             animate="visible"
-            className="text-[6rem] flex flex-col justify-end font-serif items-center mt-10 font-bold bg-clip-text"
+            className="text-4xl sm:text-[3.5rem] md:text-[4rem] lg:text-[6rem] text-blue-gray-900 flex flex-col justify-center font-serif items-center font-bold text-center mt-5 "
           >
-            Discover <span>Start Ups</span>
-            <span className="text-4xl ">that are changing</span>the game!.
+            Discover <span className="text-3xl sm:text-[3rem] md:text-[3.5rem] text-blue-gray-900 flex flex-col justify-center font-serif items-center sm:py-2 font-bold text-center lg:text-[5rem] lg:mt-6">Start Ups</span>
+            <span className="text-2xl md:text-4xl sm:text-3xl sm:py-2 md:py-6 lg:py-7">that are changing</span> the game!
           </motion.p>
-          <motion.div 
-          variants={container(0)}
-          initial="hidden"
-          animate="visible"className="flex justify-end mr-10 mt-2">
-            <button className="bg-black hover:bg-gray-800 text-white px-5 py-1 rounded-md flex justify-center items-center mx-4">Investor
-            <FaArrowRight className="text-white mx-2 w-4"/>
+          <motion.div
+            variants={container(0)}
+            initial="hidden"
+            animate="visible"
+            className="flex justify-center md:justify-end w-full sm:my-5 md:mt-14 mt-2"
+          >
+            <button className="text-sm sm:text-md bg-gray-700 hover:bg-gray-900  text-white px-5 py-1 rounded-md flex justify-center items-center mx-4">
+              Investor
+              <FaArrowRight className="text-white mx-2 w-4" />
             </button>
           </motion.div>
         </div>
-      </div>]
+      </div>
     </>
   );
 };

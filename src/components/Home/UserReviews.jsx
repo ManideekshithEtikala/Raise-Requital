@@ -26,7 +26,7 @@ console.log(reviews)
         loop={true}
         autoplayDelay={2500}
         autoplay={true}
-        className="rounded-xl h-[70vh]"
+        className="rounded-xl h-[60vh] md:h-[70vh]"
       >
         {reviews?.map((review, index) => (
           <div
@@ -36,18 +36,18 @@ console.log(reviews)
             <Typography
               variant="h2"
               color="blue-gray"
-              className="mb-6 font-light"
+              className="mb-3 font-light text-lg md:text-2xl lg:text-[2rem]"
             >
               {review.Review}
             </Typography>
             <Avatar src={review.ImageUrl} alt="image" size="lg" />
-            <Typography variant="h6" className="mt-4">
+            <Typography variant="h6" className="mt-2 text-lg md:text-2xl lg:text-[2rem] text-blue-gray-800">
               {review.Name}
             </Typography>
             <Typography color="gray" className="mb-4 font-normal">
               {review.Postion} {/* Fixed typo: Postion -> Position */}
             </Typography>
-            <Rate defaultValue={review.Rating} allowHalf={true} disabled size="large" count={5} style={{color:"black"
+            <Rate defaultValue={review.Rating} allowHalf={true} disabled size="large" count={5} style={{color:"#28304a"
             }} />
           </div>
         ))}

@@ -15,7 +15,6 @@ router.get('/', async (req, res) => {
 // GET all businesses
 router.get('/:category', async (req, res) => {
   const {category} = req.params;
-  console.log(category)
   try {
     const businesses = await Business.find({ businessModel:category
     });

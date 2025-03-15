@@ -3,8 +3,9 @@ import { useContext, useState } from "react";
 import { UserContext } from "../../Authentication/UserContext";
 import PropTypes from 'prop-types';
 import { googleLogout } from "@react-oauth/google";
-
+import { useNavigate } from "react-router-dom";
 const NavbarE = ({ onCategoryChange }) => {
+  const navigate=useNavigate();
   const { user } = useContext(UserContext);
   const [userlogin, setUserLogin] = useState(user?.email_verified);
   const [dropdownVisible, setDropdownVisible] = useState(false);
@@ -41,6 +42,7 @@ const NavbarE = ({ onCategoryChange }) => {
               src="https://www.creativefabrica.com/wp-content/uploads/2019/03/Monogram-RR-Logo-Design-by-Greenlines-Studios.jpg"
               alt="logoimage"
               className="w-10 h-10 rounded-full"
+              onClick={()=>navigate('/')}
             />
           </div>
         </div>

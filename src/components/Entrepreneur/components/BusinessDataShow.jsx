@@ -15,7 +15,6 @@ const BusinessDataShow = ({ category }) => {
         .then((res) => {
           setBusinessData(res?.data);
           setLoading(false);
-          console.log(res?.data);
         })
         .catch((err) => {
           setError(err.message);
@@ -28,7 +27,6 @@ const BusinessDataShow = ({ category }) => {
         .then((res) => {
           setBusinessData(res?.data);
           setLoading(false);
-          console.log(res?.data);
         })
         .catch((err) => {
           setError(err.message);
@@ -37,7 +35,6 @@ const BusinessDataShow = ({ category }) => {
     }
   }, [category]);
 
-  console.log(businessData);
 
   if (loading) {
     return <div>Loading...</div>;
