@@ -47,7 +47,7 @@ export const Navbar = () => {
                 src={user.picture}
                 onClick={toggleDropdown}
                 alt="profile image"
-                className="rounded-full w-8 h-8 cursor-pointer"
+                className="rounded-full w-6 h-6 sm:w-8 sm:h-8 cursor-pointer"
               />
               {dropdownVisible && (
                 <div className="absolute right-0 mt-2 w-48 bg-white border rounded-md shadow-lg">

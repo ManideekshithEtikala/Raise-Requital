@@ -7,6 +7,7 @@ import { BrowserRouter } from "react-router-dom";
 import Home from "./components/Home/Home";
 import HomePage from "./components/Entrepreneur/HomePage.jsx";
 import UserDetials from "./components/Entrepreneur/UserDetials/UserDetials.jsx";
+import IndividualBuisines from "./components/Entrepreneur/components/IndividualBuisines.jsx";
 function App() {
   return (
     <>
@@ -18,6 +19,7 @@ function App() {
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/Entrepreneur/Details" element={<UserDetials />} />
                 <Route path="/Entrepreneur" element={<HomePage />} />
+                <Route path="/Entrepreneur/:id" element={<IndividualBuisines />} />
               </Routes>
         </BrowserRouter>
       </UserProvider>

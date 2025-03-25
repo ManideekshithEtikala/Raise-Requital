@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
-
+import { Link } from "react-router";
 const BusinessDataShow = ({ category }) => {
   const [businessData, setBusinessData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -34,8 +34,6 @@ const BusinessDataShow = ({ category }) => {
         });
     }
   }, [category]);
-
-
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -47,13 +45,18 @@ const BusinessDataShow = ({ category }) => {
   return (
     <div className="container mx-auto px-4">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 mt-16">
+
         {businessData.map((model) => (
           <div
-            className="w-full bg-gray-50 border border-gray-300 rounded-lg shadow"
+            className="w-full h-[400px] bg-gray-50 border border-gray-300 rounded-lg shadow"
             key={model._id}
           >
-            <a href="#" className="flex items-center justify-center">
-              <img className="rounded-t-lg mt-1 w-full" src={model?.imageUrl} alt="" />
+            <a href="#" className="flex h-[200px] w-full items-center justify-center outline-none">
+              <img
+                className="rounded-t-lg mt-1 w-fit h-full object-cover"
+                src={model?.imageUrl }
+                alt=""
+              />
             </a>
             <div className="p-5">
               <a href="#">
@@ -61,11 +64,12 @@ const BusinessDataShow = ({ category }) => {
                   {model?.title}
                 </h5>
               </a>
-              <p className="mb-3 font-normal text-gray-500">
+              <p className="mb-3 font-normal text-gray-500 line-clamp-3">
                 {model?.description}
               </p>
-              <a
-                href="#"
+              <Link
+              to={`/Entrepreneur/${model._id}`}
+              state={{model}}
                 className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-gray-700 rounded-lg hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
               >
                 Read more
@@ -84,7 +88,7 @@ const BusinessDataShow = ({ category }) => {
                     d="M1 5h12m0 0L9 1m4 4L9 9"
                   />
                 </svg>
-              </a>
+              </Link>
             </div>
           </div>
         ))}

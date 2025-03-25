@@ -1,72 +1,75 @@
 import { useNavigate } from "react-router-dom";
-import { useState,useContext, useEffect } from "react";
+import { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import { UserContext } from "../../Authentication/UserContext.jsx"; // Adjust the path as necessary
-const UserDetials = () => {
-  const navigate=useNavigate();
-const [title,setTitle]=useState('');
-const [businessModel,setBusinessModel]=useState('');
-const [description,setDescription]=useState('');
-const [fundingReqDescription,setFundingReqDescription]=useState('');
-const [fundingReqRequest,setFundingReqRequest]=useState('');
-const [investorRoi,setInvestorRoi]=useState('');
-const [competitors,setCompetitors]=useState('');
-const [productAndServices,setProductAndServices]=useState('');
-const [marketingAndSalesStrategy,setMarketingAndSalesStrategy]=useState('');
-const [financialPlan,setFinancialPlan]=useState('');
-const [team,setTeam]=useState('');
-const {user}=useContext(UserContext);
-const [loading,setLoading] = useState(false);
-const [imageUrl, setImageUrl] = useState(null);
 
-    // Handle Image Selection
-    const handleImageChange = (event) => {
-        const file = event.target.files[0];
-        if (file) {
-            const url = URL.createObjectURL(file); // Generate Temporary URL
-            setImageUrl(url);
-            console.log(url)
-        }
-    };
-useEffect(() => {
-  if (!user) {
-    navigate("/login");
-  }
-}, [user, navigate]);
-//handling post method in axios of the userData or EnterpreneurData
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  setLoading(true);
-  const data = {
-    userId:user?.clientId,
-    title:title,
-    imageUrl:imageUrl,
-    businessModel:businessModel,
-    description:description,
-    fundingReq: {
-      description: fundingReqDescription,
-      request: fundingReqRequest,
-      investorRoi:investorRoi
-    },
-    competitors:competitors,
-    productAndServices:productAndServices,
-    marketingAndSalesStrategy : marketingAndSalesStrategy,
-    financialPlan: financialPlan,
-    teamDetails: team
+const UserDetials = () => {
+  const navigate = useNavigate();
+  const [title, setTitle] = useState('');
+  const [businessModel, setBusinessModel] = useState('');
+  const [description, setDescription] = useState('');
+  const [fundingReqDescription, setFundingReqDescription] = useState('');
+  const [fundingReqRequest, setFundingReqRequest] = useState('');
+  const [investorRoi, setInvestorRoi] = useState('');
+  const [competitors, setCompetitors] = useState('');
+  const [productAndServices, setProductAndServices] = useState('');
+  const [marketingAndSalesStrategy, setMarketingAndSalesStrategy] = useState('');
+  const [financialPlan, setFinancialPlan] = useState('');
+  const [team, setTeam] = useState('');
+  const { user } = useContext(UserContext);
+  const [loading, setLoading] = useState(false);
+  const defaultImage="https://img.freepik.com/premium-vector/default-image-icon-vector-missing-picture-page-website-design-mobile-app-no-photo-available_87543-11093.jpg"
+  const [imageUrl, setImageUrl] = useState(defaultImage);
+
+  // Handle Image Selection
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const url = URL.createObjectURL(file); // Generate Temporary URL
+      setImageUrl(url);
+    }else{
+      setImageUrl(defaultImage)
+    }
   };
 
-  try {
-    const response = await axios.post('http://localhost:4000/business', data);
-    console.log('Data posted successfully:', response.data);
-    navigate('/Entrepreneur');
-    setLoading(false)
-  } catch (error) {
-    console.error('Error posting data:', error);
-    setLoading(false)
-  }
-};
+  useEffect(() => {
+    if (!user) {
+      navigate("/login");
+    }
+  }, [user, navigate]);
 
+  // Handling post method in axios of the userData or EnterpreneurData
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    const data = {
+      userId: user?.clientId,
+      title: title,
+      imageUrl: imageUrl,
+      businessModel: businessModel,
+      description: description,
+      fundingReq: {
+        description: fundingReqDescription,
+        request: fundingReqRequest,
+        investorRoi: investorRoi,
+      },
+      competitors: competitors,
+      productAndServices: productAndServices,
+      marketingAndSalesStrategy: marketingAndSalesStrategy,
+      financialPlan: financialPlan,
+      teamDetails: team,
+    };
 
+    try {
+      const response = await axios.post('http://localhost:4000/business', data);
+      console.log('Data posted successfully:', response.data);
+      navigate('/Entrepreneur');
+      setLoading(false);
+    } catch (error) {
+      console.error('Error posting data:', error);
+      setLoading(false);
+    }
+  };
 
   return (
     <>
@@ -89,10 +92,10 @@ const handleSubmit = async (e) => {
                 <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                   Enter necessary details
                 </h1>
-                <form className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <form className="space-y-6" onSubmit={handleSubmit}>
+                  <div className="grid grid-cols-2 md:grid-cols-2 gap-6">
                     {/* Title */}
-                    <div>
+                    <div className="col-span-2">
                       <label
                         htmlFor="title"
                         className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -106,15 +109,14 @@ const handleSubmit = async (e) => {
                         placeholder="Business Title"
                         className="bg-gray-50 border outline-none border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         required
-                        onChange={(e)=>setTitle(e.target.value)}
+                        onChange={(e) => setTitle(e.target.value)}
                       />
                     </div>
                     {/* Image URL */}
-                    <div>
+                    <div className="col-span-2">
                       <label
                         htmlFor="imageUrl"
                         className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                        
                       >
                         ImageUrl
                       </label>
@@ -124,43 +126,43 @@ const handleSubmit = async (e) => {
                         id="imageUrl"
                         placeholder="Select Image File"
                         className="bg-gray-50 border outline-none border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        required=""
                         accept="image/*"
                         onChange={handleImageChange}
                       />
                     </div>
                     {/* Business Model */}
                     <div className="col-span-2">
-  <label
-    htmlFor="businessModel"
-    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-  >
-    Business Model
-  </label>
-  <select
-    name="businessModel"
-    id="businessModel"
-    className="bg-gray-50 border outline-none border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-    onChange={(e) => setBusinessModel(e.target.value)}
-    required
-  >
-    <option value="" disabled selected>Select your business model</option>
-    <option value="jewelry">Jewelry</option>
-    <option value="clothing">Clothing</option>
-    <option value="fashion">Fashion</option>
-    <option value="accessories">Accessories</option>
-    <option value="techProducts">TechProducts</option>
-    <option value="sports">Sports</option>
-    <option value="electronics">Electronics</option>
-    <option value="">None</option>
-  </select>
-</div>
+                      <label
+                        htmlFor="businessModel"
+                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                      >
+                        Business Model
+                      </label>
+                      <select
+                        name="businessModel"
+                        id="businessModel"
+                        className="bg-gray-50 border outline-none border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        onChange={(e) => setBusinessModel(e.target.value)}
+                        required
+                      >
+                        <option disabled defaultValue="" selected>
+                          Select your business model
+                        </option>
+                        <option value="jewelry">Jewelry</option>
+                        <option value="clothing">Clothing</option>
+                        <option value="fashion">Fashion</option>
+                        <option value="accessories">Accessories</option>
+                        <option value="techProducts">Tech Products</option>
+                        <option value="sports">Sports</option>
+                        <option value="electronics">Electronics</option>
+                        <option value="">None</option>
+                      </select>
+                    </div>
                     {/* Description */}
                     <div className="col-span-2">
                       <label
                         htmlFor="description"
                         className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                       
                       >
                         Description
                       </label>
@@ -170,7 +172,7 @@ const handleSubmit = async (e) => {
                         placeholder="Describe your business"
                         className="bg-gray-50 border outline-none border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         rows="4"
-                        onChange={(e)=>setDescription(e.target.value)}
+                        onChange={(e) => setDescription(e.target.value)}
                         required=""
                       ></textarea>
                     </div>
@@ -179,7 +181,6 @@ const handleSubmit = async (e) => {
                       <label
                         htmlFor="fundingReqDescription"
                         className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                        
                       >
                         FundingReqDescription
                       </label>
@@ -189,7 +190,7 @@ const handleSubmit = async (e) => {
                         placeholder="Describe your funding request"
                         className="bg-gray-50 border outline-none border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         rows="4"
-                        onChange={(e)=>setFundingReqDescription(e.target.value)}
+                        onChange={(e) => setFundingReqDescription(e.target.value)}
                         required=""
                       ></textarea>
                     </div>
@@ -197,7 +198,6 @@ const handleSubmit = async (e) => {
                       <label
                         htmlFor="fundingReqRequest"
                         className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                        
                       >
                         FundingReqRequest
                       </label>
@@ -208,14 +208,13 @@ const handleSubmit = async (e) => {
                         placeholder="Funding Request"
                         className="bg-gray-50 border outline-none border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         required=""
-                        onChange={(e)=>setFundingReqRequest(e.target.value)}
+                        onChange={(e) => setFundingReqRequest(e.target.value)}
                       />
                     </div>
                     <div className="col-span-2">
                       <label
                         htmlFor="investorRoi"
                         className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                        
                       >
                         InvestorRoi
                       </label>
@@ -226,7 +225,7 @@ const handleSubmit = async (e) => {
                         placeholder="Investor ROI"
                         className="bg-gray-50 border outline-none border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         required=""
-                        onChange={(e)=>setInvestorRoi(e.target.value)}
+                        onChange={(e) => setInvestorRoi(e.target.value)}
                       />
                     </div>
                     {/* Competitors */}
@@ -234,7 +233,6 @@ const handleSubmit = async (e) => {
                       <label
                         htmlFor="competitors"
                         className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                                            
                       >
                         Competitors
                       </label>
@@ -243,7 +241,7 @@ const handleSubmit = async (e) => {
                         id="competitors"
                         placeholder="List your competitors"
                         className="bg-gray-50 border outline-none border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        onChange={(e)=>setCompetitors(e.target.value)}  
+                        onChange={(e) => setCompetitors(e.target.value)}
                         rows="4"
                         required=""
                       ></textarea>
@@ -253,7 +251,6 @@ const handleSubmit = async (e) => {
                       <label
                         htmlFor="team"
                         className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                        
                       >
                         TeamDetials
                       </label>
@@ -262,7 +259,7 @@ const handleSubmit = async (e) => {
                         id="team"
                         placeholder="Enter Team Details and No of members"
                         className="bg-gray-50 border outline-none border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        onChange={(e)=>setTeam(e.target.value)}
+                        onChange={(e) => setTeam(e.target.value)}
                         rows="4"
                         required=""
                       ></textarea>
@@ -272,7 +269,6 @@ const handleSubmit = async (e) => {
                       <label
                         htmlFor="productAndServices"
                         className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                        
                       >
                         ProductAndServices
                       </label>
@@ -282,7 +278,7 @@ const handleSubmit = async (e) => {
                         placeholder="Describe your products and services"
                         className="bg-gray-50 border outline-none border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         rows="4"
-                        onChange={(e)=>setProductAndServices(e.target.value)}
+                        onChange={(e) => setProductAndServices(e.target.value)}
                         required=""
                       ></textarea>
                     </div>
@@ -291,7 +287,6 @@ const handleSubmit = async (e) => {
                       <label
                         htmlFor="marketingAndSalesStrategy"
                         className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                                           
                       >
                         MarketingAndSalesStrategy
                       </label>
@@ -301,7 +296,7 @@ const handleSubmit = async (e) => {
                         placeholder="Describe your marketing and sales strategy"
                         className="bg-gray-50 border outline-none border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         rows="4"
-                        onChange={(e)=>setMarketingAndSalesStrategy(e.target.value)}   
+                        onChange={(e) => setMarketingAndSalesStrategy(e.target.value)}
                         required=""
                       ></textarea>
                     </div>
@@ -310,7 +305,6 @@ const handleSubmit = async (e) => {
                       <label
                         htmlFor="financialPlan"
                         className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                                         
                       >
                         FinancialPlan
                       </label>
@@ -321,21 +315,18 @@ const handleSubmit = async (e) => {
                         className="bg-gray-50 border outline-none border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         rows="4"
                         required=""
-                        onChange={(e)=>setFinancialPlan(e.target.value)}    
+                        onChange={(e) => setFinancialPlan(e.target.value)}
                       ></textarea>
                     </div>
-                    
                   </div>
                   <div className="flex items-center justify-between">
-
-                  <button
-                    type="submit"
-                    onClick={handleSubmit}
-                    className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 bg-gray-700 hover:bg-gray-900"
-                  >
-                    Submit
-                  </button>
-
+                    <button
+                      type="submit"
+                      onClick={handleSubmit}
+                      className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 bg-gray-700 hover:bg-gray-900"
+                    >
+                      Submit
+                    </button>
                   </div>
                 </form>
                 {loading && (
