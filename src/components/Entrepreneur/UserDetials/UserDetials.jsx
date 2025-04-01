@@ -9,8 +9,8 @@ const UserDetials = () => {
   const [businessModel, setBusinessModel] = useState('');
   const [description, setDescription] = useState('');
   const [fundingReqDescription, setFundingReqDescription] = useState('');
-  const [fundingReqRequest, setFundingReqRequest] = useState('');
-  const [investorRoi, setInvestorRoi] = useState('');
+  const [fundingReqRequest, setFundingReqRequest] = useState(0);
+  const [investorRoi, setInvestorRoi] = useState(0);
   const [competitors, setCompetitors] = useState('');
   const [productAndServices, setProductAndServices] = useState('');
   const [marketingAndSalesStrategy, setMarketingAndSalesStrategy] = useState('');
@@ -18,6 +18,7 @@ const UserDetials = () => {
   const [team, setTeam] = useState('');
   const { user } = useContext(UserContext);
   const [loading, setLoading] = useState(false);
+  const [calendlyLink, setCalendlyLink] = useState('');
   const defaultImage="https://img.freepik.com/premium-vector/default-image-icon-vector-missing-picture-page-website-design-mobile-app-no-photo-available_87543-11093.jpg"
   const [imageUrl, setImageUrl] = useState(defaultImage);
 
@@ -42,35 +43,61 @@ const UserDetials = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+  
+    // Convert request to a number and add a dollar sign
+    const formattedRequest = parseFloat(fundingReqRequest); // Ensure it's a number
+    if (isNaN(formattedRequest) || formattedRequest <= 0) {
+      alert("Please enter a valid funding request amount.");
+      setLoading(false);
+      return;
+    }
+  
+    // Convert ROI to a number and ensure it's valid
+    const formattedRoi = parseFloat(investorRoi); // Ensure it's a number
+    if (isNaN(formattedRoi) || formattedRoi < 0 || formattedRoi > 100) {
+      alert("Please enter a valid ROI percentage (0-100).");
+      setLoading(false);
+      return;
+    }
+  
     const data = {
-      userId: user?.clientId,
+      userId: user?.sub,
       title: title,
       imageUrl: imageUrl,
       businessModel: businessModel,
       description: description,
       fundingReq: {
         description: fundingReqDescription,
-        request: fundingReqRequest,
-        investorRoi: investorRoi,
+        request: formattedRequest, // Send as a number
+        investorRoi: formattedRoi, // Send as a number
       },
       competitors: competitors,
       productAndServices: productAndServices,
       marketingAndSalesStrategy: marketingAndSalesStrategy,
       financialPlan: financialPlan,
+      calendlyLink: calendlyLink,
       teamDetails: team,
     };
-
+  
     try {
-      const response = await axios.post('http://localhost:4000/business', data);
-      console.log('Data posted successfully:', response.data);
-      navigate('/Entrepreneur');
+      const response = await axios.post("http://localhost:4000/business", data);
+      console.log("Data posted successfully:", response.data);
+      navigate("/Entrepreneur");
       setLoading(false);
     } catch (error) {
-      console.error('Error posting data:', error);
+      console.error("Error posting data:", error);
       setLoading(false);
     }
   };
-
+  const formatCurrency = (value) => {
+    if (!value) return "";
+    return `$${parseFloat(value).toLocaleString("en-US")}`;
+  };
+  
+  const formatPercentage = (value) => {
+    if (!value) return "";
+    return `${parseFloat(value)}%`;
+  };
   return (
     <>
       <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
@@ -202,14 +229,15 @@ const UserDetials = () => {
                         FundingReqRequest
                       </label>
                       <input
-                        type="text"
-                        name="fundingReqRequest"
-                        id="fundingReqRequest"
-                        placeholder="Funding Request"
-                        className="bg-gray-50 border outline-none border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        required=""
-                        onChange={(e) => setFundingReqRequest(e.target.value)}
-                      />
+  type="text"
+  name="fundingReqRequest"
+  id="fundingReqRequest"
+  placeholder="Request your funding amount in dollars"
+  value={fundingReqRequest ? formatCurrency(fundingReqRequest) : ""}
+  className="bg-gray-50 border outline-none border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+  required=""
+  onChange={(e) => setFundingReqRequest(e.target.value.replace(/[^0-9.]/g, ""))}
+/>
                     </div>
                     <div className="col-span-2">
                       <label
@@ -219,14 +247,15 @@ const UserDetials = () => {
                         InvestorRoi
                       </label>
                       <input
-                        type="text"
-                        name="investorRoi"
-                        id="investorRoi"
-                        placeholder="Investor ROI"
-                        className="bg-gray-50 border outline-none border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        required=""
-                        onChange={(e) => setInvestorRoi(e.target.value)}
-                      />
+  type="text"
+  name="investorRoi"
+  id="investorRoi"
+  placeholder="Investor ROI please select between 0-100"
+  value={investorRoi ? formatPercentage(investorRoi) : ""}
+  className="bg-gray-50 border outline-none border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+  required=""
+  onChange={(e) => setInvestorRoi(e.target.value.replace(/[^0-9.]/g, ""))}
+/>
                     </div>
                     {/* Competitors */}
                     <div className="col-span-2">
@@ -318,6 +347,27 @@ const UserDetials = () => {
                         onChange={(e) => setFinancialPlan(e.target.value)}
                       ></textarea>
                     </div>
+                    <div className="col-span-2">
+                      <label
+                        htmlFor="calendlyLink"
+                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                      >
+                        Calendly Link
+                      </label>
+                      <input
+                        type="text"
+                        name="calendlyLink"
+                        id="calendlyLink"
+                        placeholder="Give your calendly link to schedule a meeting"
+                        className="bg-gray-50 border outline-none border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        rows="4"
+                        required=""
+                        onChange={(e) => setCalendlyLink(e.target.value)}
+                      ></input>
+                    </div>
+                  </div>
+                  <div>
+                    <a href="https://youtu.be/OyRuIG_DYZ4?si=nm3_xxlDa53qfW8t" className="hover:underline hover:text-blue-600 text-gray-600" target="_blank">Click this link to know how to create calendly link</a>
                   </div>
                   <div className="flex items-center justify-between">
                     <button

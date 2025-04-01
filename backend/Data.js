@@ -8,7 +8,9 @@ import wipro from '../src/assets/wipro.png';
 import kotak from '../src/assets/kotak.png';
 import wizard from '../src/assets/wizard.png';
 import mf from '../src/assets/mf.png';
-
+import jsmith from '../src/assets/janesmith.png'
+import user3 from '../src/assets/user3.png'
+import bbrown from '../src/assets/bbrown.png'
 export const userReviews = [
     {
       id: 1,
@@ -16,7 +18,7 @@ export const userReviews = [
       Rating: 4.5,
       Position: "Web Developer",
       Review: "This is the best product ever and I will recommend it to everyone.",
-      ImageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9",
+      ImageUrl: "https://images.unsplash.com/photo-1633332755192-727a05c4013d?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D",
     },
     {
       id: 2,
@@ -24,7 +26,7 @@ export const userReviews = [
       Rating: 4.7,
       Position: "Graphic Designer",
       Review: "Amazing product with great features. Highly recommended!",
-      ImageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd10",
+      ImageUrl: jsmith,
     },
     {
       id: 3,
@@ -32,7 +34,7 @@ export const userReviews = [
       Rating: 4.8,
       Position: "Project Manager",
       Review: "A must-have product for professionals. Excellent quality!",
-      ImageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd11",
+      ImageUrl: user3,
     },
     {
       id: 4,
@@ -40,7 +42,7 @@ export const userReviews = [
       Rating: 4.6,
       Position: "Software Engineer",
       Review: "Great product with outstanding performance. Worth every penny.",
-      ImageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd12",
+      ImageUrl: bbrown,
     }
   ];
 
