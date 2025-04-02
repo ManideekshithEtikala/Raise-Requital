@@ -5,7 +5,6 @@ import { userReviews } from "../../../backend/Data";
 
 const UserReviews = () => {
   const reviews = userReviews || [];
-console.log(reviews)
   return (
     <>
       <Carousel

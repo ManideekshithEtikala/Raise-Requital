@@ -13,8 +13,8 @@ const Signup = () => {
     const decoded_data = jwtDecode(response?.credential);
     // Storing data
     const clientId = response?.clientId;
-    const { email_verified, name, picture } = decoded_data;
-    const user = { email_verified, name, picture, clientId };
+    const { email_verified, name, picture ,sub } = decoded_data;
+    const user = { email_verified, name, picture, clientId,sub };
 
     // Update user data in context
     setUser (user);

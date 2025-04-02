@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
+import { ImSpinner6 } from "react-icons/im";
 import { Link } from "react-router";
 const BusinessDataShow = ({ category }) => {
   const [businessData, setBusinessData] = useState([]);
@@ -35,7 +36,9 @@ const BusinessDataShow = ({ category }) => {
     }
   }, [category]);
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className="flex justify-center h-screen">
+      <ImSpinner6 className="animate-spin text-4xl text-center mt-20" />
+      </div>
   }
 
   if (error) {
@@ -47,7 +50,9 @@ const BusinessDataShow = ({ category }) => {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 mt-16">
 
         {businessData.map((model) => (
-          <div
+          <Link
+          to={`/Entrepreneur/${model._id}`}
+          state={{model}}
             className="w-full h-[400px] bg-gray-50 border border-gray-300 rounded-lg shadow"
             key={model._id}
           >
@@ -90,7 +95,7 @@ const BusinessDataShow = ({ category }) => {
                 </svg>
               </Link>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </div>
