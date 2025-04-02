@@ -10,7 +10,7 @@ const Head = () => {
       x: 0,
       opacity: 1,
       transition: { duration: 1.5, delay: delay },
-    },
+    }
   });
 
   return (
@@ -44,7 +44,7 @@ const Head = () => {
             animate="visible"
             className="text-4xl sm:text-[3.5rem] md:text-[4rem] lg:text-[6rem] text-blue-gray-900 flex flex-col justify-center font-serif items-center font-bold text-center mt-5 "
           >
-            Discover <span className="text-3xl sm:text-[3rem] md:text-[3.5rem] text-blue-gray-900 flex flex-col justify-center font-serif items-center sm:py-2 font-bold text-center lg:text-[5rem] lg:mt-6">Start ups</span>
+            Discover <span className="text-3xl sm:text-[3rem] md:text-[3.5rem] text-blue-gray-900 flex flex-col justify-center font-serif items-center sm:py-2 font-bold text-center lg:text-[3rem] lg:mt-6">Start ups</span>
             <span className="text-2xl md:text-4xl sm:text-3xl sm:py-2 md:py-6 lg:py-7">that are changing</span> the game!
           </motion.p>
           <motion.div
