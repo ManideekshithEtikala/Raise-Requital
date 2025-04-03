@@ -100,13 +100,13 @@ const {user}=useContext(UserContext)
       {/* Audio Elements for Notification Sounds */}
       <audio
         ref={incomingSoundRef}
-        src="public/sounds/incoming.mp3"
+        src="/sounds/incoming.mp3"
         preload="auto"
         onCanPlay={() => console.log("Incoming sound is ready to play")}
       ></audio>
       <audio
         ref={outgoingSoundRef}
-        src="public/sounds/outgoing.mp3"
+        src="/sounds/outgoing.mp3"
         preload="auto"
         onCanPlay={() => console.log("Outgoing sound is ready to play")}
       ></audio>
