@@ -35,7 +35,7 @@ const Head = () => {
             className="flex justify-center md:justify-end lg:justify-center w-full sm:my-5 md:mt-20 mb-5 mt-2"
           >
             <button className="text-sm sm:text-md bg-gray-700 hover:bg-gray-900 px-3 py-1 rounded-md text-white flex justify-center items-center mx-2">
-              <Link to={'/Entrepreneur/Details'}>Entrepreneur</Link>
+              <Link to={'/Entrepreneur/Details'}>Varshith</Link>
               <FaArrowRight className="text-white mx-2 w-4" />
             </button>
           </motion.div>
