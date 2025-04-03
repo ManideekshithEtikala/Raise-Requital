@@ -11,10 +11,11 @@ const Signup = () => {
 
   const responseGoogle = (response) => {
     const decoded_data = jwtDecode(response?.credential);
+    console.log(decoded_data)
     // Storing data
     const clientId = response?.clientId;
-    const { email_verified, name, picture ,sub } = decoded_data;
-    const user = { email_verified, name, picture, clientId,sub };
+    const { email_verified, name, picture ,sub,email } = decoded_data;
+    const user = { email_verified, name, picture, clientId,sub,email };
 
     // Update user data in context
     setUser (user);
