@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import BusinessDataShow from "./components/BusinessDataShow"
 import NavbarE from "./components/NavbarE"
 

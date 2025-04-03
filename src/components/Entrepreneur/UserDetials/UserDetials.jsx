@@ -119,7 +119,7 @@ const UserDetials = () => {
                 <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                   Enter necessary details
                 </h1>
-                <form className="space-y-6" onSubmit={handleSubmit}>
+                <div className="space-y-6" >
                   <div className="grid grid-cols-2 md:grid-cols-2 gap-6">
                     {/* Title */}
                     <div className="col-span-2">
@@ -378,7 +378,7 @@ const UserDetials = () => {
                       Submit
                     </button>
                   </div>
-                </form>
+                </div>
                 {loading && (
             
 <div role="status">
