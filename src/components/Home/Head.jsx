@@ -112,7 +112,7 @@ const Head = () => {
           className="text-5xl sm:text-6xl md:text-7xl font-extrabold leading-tight text-gray-900"
         >
           Big Ideas
-          <span className="block text-2xl md:text-3xl mt-4 text-blue-700 font-medium">need bold believers</span>
+          <span className="block text-2xl md:text-3xl mt-2 text-emerald-600">need bold believers</span>
         </motion.h1>
         
         <motion.div 
