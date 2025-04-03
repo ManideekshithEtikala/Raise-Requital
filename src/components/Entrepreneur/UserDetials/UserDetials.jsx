@@ -176,13 +176,16 @@ const UserDetials = () => {
                           Select your business model
                         </option>
                         <option value="jewelry">Jewelry</option>
-                        <option value="clothing">Clothing</option>
                         <option value="fashion">Fashion</option>
-                        <option value="accessories">Accessories</option>
-                        <option value="techProducts">Tech Products</option>
                         <option value="sports">Sports</option>
                         <option value="electronics">Electronics</option>
-                        <option value="">None</option>
+                        <option value="Farming">Farming</option>
+                        <option value="HealthCare">HealthCare</option>
+                        <option value="Financial">Financial</option>
+                        <option value="RealEstate">RealEstate</option>
+
+
+
                       </select>
                     </div>
                     {/* Description */}

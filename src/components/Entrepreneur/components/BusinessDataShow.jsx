@@ -53,7 +53,7 @@ const BusinessDataShow = ({ category }) => {
           <Link
           to={`/Entrepreneur/${model._id}`}
           state={{model}}
-            className="w-full h-[400px] bg-gray-50 border border-gray-300 rounded-lg shadow"
+            className="w-full h-fit bg-gray-50 border border-gray-300 rounded-lg shadow"
             key={model._id}
           >
             <a href="#" className="flex h-[200px] w-full items-center justify-center outline-none">

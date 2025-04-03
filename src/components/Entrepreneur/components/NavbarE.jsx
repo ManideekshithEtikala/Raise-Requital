@@ -65,13 +65,14 @@ const NavbarE = ({ onCategoryChange }) => {
               >
                 <ul className="p-2 rounded-md cursor-pointer w-full">
                   <li onClick={() => handleCategoryChange('jewelry')} className="hover:bg-gray-300 rounded-sm hover:cursor-pointer p-1">Jewelry</li>
-                  <li onClick={() => handleCategoryChange('')} className="hover:bg-gray-300 rounded-sm hover:cursor-pointer p-1">All</li>
-                  <li onClick={() => handleCategoryChange('clothing')} className="hover:bg-gray-300 rounded-sm hover:cursor-pointer p-1">Clothing</li>
                   <li onClick={() => handleCategoryChange('fashion')} className="hover:bg-gray-300 rounded-sm hover:cursor-pointer p-1">Fashion</li>
-                  <li onClick={() => handleCategoryChange('accessories')} className="hover:bg-gray-300 rounded-sm hover:cursor-pointer p-1">Accessories</li>
-                  <li onClick={() => handleCategoryChange('techProducts')} className="hover:bg-gray-300 rounded-sm hover:cursor-pointer p-1">Tech Products</li>
                   <li onClick={() => handleCategoryChange('sports')} className="hover:bg-gray-300 rounded-sm hover:cursor-pointer p-1">Sports</li>
                   <li onClick={() => handleCategoryChange('electronics')} className="hover:bg-gray-300 rounded-sm hover:cursor-pointer p-1">Electronics</li>
+                  <li onClick={() => handleCategoryChange('Farming')} className="hover:bg-gray-300 rounded-sm hover:cursor-pointer p-1">Farming</li>
+                  <li onClick={() => handleCategoryChange('HealthCare')} className="hover:bg-gray-300 rounded-sm hover:cursor-pointer p-1">HealthCare</li>
+                  <li onClick={() => handleCategoryChange('Financial')} className="hover:bg-gray-300 rounded-sm hover:cursor-pointer p-1">Financial</li>
+                  <li onClick={() => handleCategoryChange('RealEstate')} className="hover:bg-gray-300 rounded-sm hover:cursor-pointer p-1">RealEstate</li>
+                  <li onClick={() => handleCategoryChange('')} className="hover:bg-gray-300 rounded-sm hover:cursor-pointer p-1">All</li>
                 </ul>
               </div>
             )}

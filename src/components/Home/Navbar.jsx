@@ -56,10 +56,9 @@ export const Navbar = () => {
       setNotification(null); // Clear the notification after opening the chat
     }
   };
-
   return (
     <>
-      <div className="flex justify-between bg-blue-900 py-5 px-5 bg-transparent text-brown-800 ">
+      <div className="flex justify-between bg-blue-900 py-5 mx-10 bg-transparent text-brown-800 3`">
         <div className="flex items-center justify-between">
           <div>
             <img
@@ -95,7 +94,7 @@ export const Navbar = () => {
             <span className="block text-sm text-gray-900 dark:text-white">
               {user.name || "User Name"}
             </span>
-            <span className="block text-sm text-gray-500 truncate dark:text-gray-400">
+            <span className="block text-xs text-gray-500 truncate dark:text-gray-400">
               {user.email || "user@example.com"}
             </span>
           </div>
