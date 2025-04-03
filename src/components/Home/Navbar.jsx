@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useContext, useState, useEffect } from "react";
 import { UserContext } from "../Authentication/UserContext";
 import { googleLogout } from "@react-oauth/google";
-import { FiBell, FiLogOut, FiUser, FiSettings, FiDollarSign } from "react-icons/fi"; 
+import { FiBell, FiLogOut, FiUser, FiSettings, FiDollarSign } from "react-icons/fi";
 import socket from "../Entrepreneur/SocketConnnection/socket.js"; // Import the Socket.IO client instance
 
 export const Navbar = () => {
@@ -67,7 +67,9 @@ export const Navbar = () => {
 
         {/* Navigation Links */}
         <div className="flex items-center space-x-6">
-          <Link to="/Entrepreneur" className="text-white text-lg font-medium hover:text-gray-300 transition">Explore</Link>
+          <Link to="/Entrepreneur" className="text-white text-lg font-medium hover:text-gray-300 transition">
+            Explore
+          </Link>
           <div className="relative">
             <FiBell className="w-6 h-6 cursor-pointer hover:text-gray-300 transition" />
             {notification && (
@@ -87,7 +89,7 @@ export const Navbar = () => {
                 className="rounded-full w-10 h-10 border border-gray-300 shadow-md cursor-pointer hover:scale-105 transition-transform"
               />
               {dropdownVisible && (
-                  <div className="absolute right-0 mt-2 w-48 bg-white text-gray-800 shadow-lg rounded-lg overflow-hidden z-50">
+                <div className="absolute right-0 mt-2 w-48 bg-white text-gray-800 shadow-lg rounded-lg overflow-hidden z-50">
                   <div className="px-4 py-3 border-b">
                     <span className="block text-sm font-semibold">{user.name || "User Name"}</span>
                     <span className="block text-xs text-gray-500">{user.email || "user@example.com"}</span>
@@ -95,17 +97,17 @@ export const Navbar = () => {
                   <ul className="py-2">
                     <li>
                       <Link to="/dashboard" className="flex items-center px-4 py-2 hover:bg-gray-100 transition">
-                        <FiUser className="mr-2"/> Dashboard
+                        <FiUser className="mr-2" /> Dashboard
                       </Link>
                     </li>
                     <li>
                       <Link to="/settings" className="flex items-center px-4 py-2 hover:bg-gray-100 transition">
-                        <FiSettings className="mr-2"/> Settings
+                        <FiSettings className="mr-2" /> Settings
                       </Link>
                     </li>
                     <li>
                       <Link to="/earnings" className="flex items-center px-4 py-2 hover:bg-gray-100 transition">
-                        <FiDollarSign className="mr-2"/> Earnings
+                        <FiDollarSign className="mr-2" /> Earnings
                       </Link>
                     </li>
                     <li>
@@ -113,7 +115,7 @@ export const Navbar = () => {
                         onClick={handleLogout}
                         className="flex items-center w-full px-4 py-2 text-left hover:bg-gray-100 transition"
                       >
-                        <FiLogOut className="mr-2"/> Sign out
+                        <FiLogOut className="mr-2" /> Sign out
                       </button>
                     </li>
                   </ul>
