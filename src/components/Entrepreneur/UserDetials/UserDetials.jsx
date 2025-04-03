@@ -119,7 +119,7 @@ const UserDetials = () => {
                 <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                   Enter necessary details
                 </h1>
-                <form className="space-y-6" onSubmit={handleSubmit}>
+                <div className="space-y-6" >
                   <div className="grid grid-cols-2 md:grid-cols-2 gap-6">
                     {/* Title */}
                     <div className="col-span-2">
@@ -176,16 +176,13 @@ const UserDetials = () => {
                           Select your business model
                         </option>
                         <option value="jewelry">Jewelry</option>
+                        <option value="clothing">Clothing</option>
                         <option value="fashion">Fashion</option>
+                        <option value="accessories">Accessories</option>
+                        <option value="techProducts">Tech Products</option>
                         <option value="sports">Sports</option>
                         <option value="electronics">Electronics</option>
-                        <option value="Farming">Farming</option>
-                        <option value="HealthCare">HealthCare</option>
-                        <option value="Financial">Financial</option>
-                        <option value="RealEstate">RealEstate</option>
-
-
-
+                        <option value="">None</option>
                       </select>
                     </div>
                     {/* Description */}
@@ -381,7 +378,7 @@ const UserDetials = () => {
                       Submit
                     </button>
                   </div>
-                </form>
+                </div>
                 {loading && (
             
 <div role="status">
