@@ -78,42 +78,75 @@ export const Navbar = () => {
             </span>
           </div>
           <div>
-            {userlogin ? (
-              <div className="relative">
-                <img
-                  src={user.picture}
-                  onClick={toggleDropdown}
-                  alt="profile image"
-                  className="rounded-full w-6 h-6 sm:w-8 sm:h-8 cursor-pointer"
-                />
-                {dropdownVisible && (
-                  <div className="absolute right-0 mt-2 w-48 bg-white border rounded-md shadow-lg">
-                    <button
-                      onClick={handleLogout}
-                      className="block px-4 py-2 text-gray-800 hover:bg-gray-100 w-full text-left rounded-md"
-                    >
-                      Logout
-                    </button>
-                    <Link
-                      to="/profile"
-                      className="block px-4 py-2 text-gray-800 hover:bg-gray-100 rounded-md"
-                    >
-                      Profile
-                    </Link>
-                  </div>
-                )}
-              </div>
-            ) : (
-              <Link
-                to={"/login"}
-                className="p-2 rounded-md cursor-pointer transition duration-4000 ease-in-out"
-              >
-                <span className="text-gray-800 hover:text-gray-900 hover:underline">
-                  Login
-                </span>
-              </Link>
-            )}
+  {userlogin ? (
+    <div className="relative">
+      <img
+        src={user.picture}
+        onClick={toggleDropdown}
+        alt="profile image"
+        className="rounded-full w-6 h-6 sm:w-8 sm:h-8 cursor-pointer"
+      />
+      {dropdownVisible && (
+        <div
+          className="z-50 my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow-sm dark:bg-gray-700 dark:divide-gray-600 absolute right-0 mt-2 w-48"
+          id="user-dropdown"
+        >
+          <div className="px-4 py-3">
+            <span className="block text-sm text-gray-900 dark:text-white">
+              {user.name || "User Name"}
+            </span>
+            <span className="block text-sm text-gray-500 truncate dark:text-gray-400">
+              {user.email || "user@example.com"}
+            </span>
           </div>
+          <ul className="py-2" aria-labelledby="user-menu-button">
+            <li>
+              <Link
+                to="/dashboard"
+                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+              >
+                Dashboard
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/settings"
+                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+              >
+                Settings
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/earnings"
+                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+              >
+                Earnings
+              </Link>
+            </li>
+            <li>
+              <button
+                onClick={handleLogout}
+                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white w-full text-left"
+              >
+                Sign out
+              </button>
+            </li>
+          </ul>
+        </div>
+      )}
+    </div>
+  ) : (
+    <Link
+      to={"/login"}
+      className="p-2 rounded-md cursor-pointer transition duration-4000 ease-in-out"
+    >
+      <span className="text-gray-800 hover:text-gray-900 hover:underline">
+        Login
+      </span>
+    </Link>
+  )}
+</div>
         </div>
       </div>
 
