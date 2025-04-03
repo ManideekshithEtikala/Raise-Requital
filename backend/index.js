@@ -51,13 +51,15 @@ io.on("connection", (socket) => {
   });
 
   // Handle sending messages
-  socket.on("sendMessage", ({ senderId, receiverId, message }) => {
+  socket.on("sendMessage", ({ senderId, receiverId, message ,senderName,senderImage }) => {
     const receiver = users[receiverId];
     if (receiver) {
       // Send the message to the receiver
       io.to(receiver.socketId).emit("receiveMessage", {
         senderId,
         message,
+        senderName,
+        senderImage
       });
       console.log(`Message sent from ${senderId} to ${receiverId}: ${message}`);
     } else {

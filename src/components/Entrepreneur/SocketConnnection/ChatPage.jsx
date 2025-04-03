@@ -2,13 +2,14 @@ import { useState, useEffect, useRef, useContext } from "react";
 import { useLocation } from "react-router-dom";
 import socket from "./socket.js"; // Import the Socket.IO client instance
 import { UserContext } from "../../Authentication/UserContext"; // Import UserContext from its module
-import { FaRegUserCircle } from "react-icons/fa";
 
 const ChatPage = () => {
   const location = useLocation();
-  const { senderId, receiverId, role } = location.state || {}; // Retrieve props from state
-  const [messages, setMessages] = useState([]);
-  const [message, setMessage] = useState("");
+  const { senderId, receiverId, role, message } = location.state || {}; // Retrieve props from state
+const [messages, setMessages] = useState(
+  message?.trim() ? [{ senderId, message, isIncoming: true }] : [] // Only add the message if it's not empty
+);
+  const [newMessage, setNewMessage] = useState("");
   const [isDarkTheme, setIsDarkTheme] = useState(false); // Track theme state
 const {user}=useContext(UserContext)
   // Refs for audio elements and chat container
@@ -28,14 +29,14 @@ const {user}=useContext(UserContext)
     socket.emit("join", { userId: senderId, role });
 
     // Listen for incoming messages
-    socket.on("receiveMessage", ({ senderId: incomingSenderId, message }) => {
+    socket.on("receiveMessage", ({ senderId: incomingSenderId, message ,senderName,senderImage}) => {
       // Ignore messages sent by the current user
       if (incomingSenderId === senderId) {
         console.log("Ignoring message sent by the current user");
         return;
       }
 
-      console.log("Message received:", { incomingSenderId, message });
+      console.log("Message received:", { incomingSenderId, message ,senderName,senderImage });
 
       // Play incoming message sound
       if (incomingSoundRef.current) {
@@ -45,7 +46,7 @@ const {user}=useContext(UserContext)
 
       setMessages((prevMessages) => [
         ...prevMessages,
-        { senderId: incomingSenderId, message, isIncoming: true },
+        { senderId: incomingSenderId, message, isIncoming: true,senderName},
       ]);
     });
 
@@ -63,28 +64,33 @@ const {user}=useContext(UserContext)
   }, [messages]);
 
   const sendMessage = () => {
-    if (message.trim()) {
-      // Play outgoing message sound
-      if (outgoingSoundRef.current) {
-        console.log("Playing outgoing sound...");
-        outgoingSoundRef.current.play().catch((error) => console.error("Error playing outgoing sound:", error));
-      }
-
-      // Send the message to the receiver
-      socket.emit("sendMessage", {
-        senderId: senderId,
-        receiverId: receiverId,
-        message,
-      });
-
-      // Add the message to the chat
-      setMessages((prevMessages) => [
-        ...prevMessages,
-        { senderId: senderId, message, isIncoming: false },
-      ]);
-
-      setMessage("");
+    if (!newMessage.trim()) {
+      console.log("Cannot send an empty message.");
+      return; // Exit the function if the message is empty
     }
+  
+    // Play outgoing message sound
+    if (outgoingSoundRef.current) {
+      console.log("Playing outgoing sound...");
+      outgoingSoundRef.current.play().catch((error) => console.error("Error playing outgoing sound:", error));
+    }
+  
+    // Send the message to the receiver
+    socket.emit("sendMessage", {
+      senderId: senderId,
+      senderName: user.name,
+      receiverId: receiverId,
+      senderImage: user?.picture || "",
+      message: newMessage, // Use newMessage here
+    });
+  
+    // Add the message to the chat
+    setMessages((prevMessages) => [
+      ...prevMessages,
+      { senderId: senderId, message: newMessage, isIncoming: false, senderName: user.name, senderImage: user.picture },
+    ]);
+  
+    setNewMessage(""); // Clear the input field
   };
 
   const toggleTheme = () => {
@@ -159,7 +165,11 @@ const {user}=useContext(UserContext)
           </div>
             <div className="ml-2 flex items-center">
               {msg.isIncoming ? (
-                <FaRegUserCircle className="w-8 h-8 rounded-full"/>
+                <img
+                  src={msg.senderImage}
+                  alt="Incoming User"
+                  className="w-8 h-8 rounded-full"
+                />
               ):(
                 <img
                 src={user?.picture}
@@ -174,17 +184,22 @@ const {user}=useContext(UserContext)
 
       {/* Message Input */}
       <div className="mt-4 flex">
-        <input
-          type="text"
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          className={`flex-grow p-2 border rounded-lg outline-none ${
-            isDarkTheme
-              ? "bg-gray-800 text-white border-gray-700"
-              : "bg-white text-gray-900 border-gray-300"
-          }`}
-          placeholder="Type your message..."
-        />
+      <input
+  type="text"
+  value={newMessage} // Bind to newMessage
+  onChange={(e) => setNewMessage(e.target.value)} 
+  onKeyDown={(e) => {
+    if (e.key === "Enter") {
+      sendMessage(); // Call sendMessage when Enter is pressed
+    }
+  }}// Update newMessage on input
+  className={`flex-grow p-2 border rounded-lg outline-none ${
+    isDarkTheme
+      ? "bg-gray-800 text-white border-gray-700"
+      : "bg-white text-gray-900 border-gray-300"
+  }`}
+  placeholder="Type your message..."
+/>
         <button
           onClick={sendMessage}
           className={`ml-2 px-4 py-2 rounded-lg ${

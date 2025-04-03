@@ -56,19 +56,19 @@ const BusinessDataShow = ({ category }) => {
             className="w-full h-fit bg-gray-50 border border-gray-300 rounded-lg shadow"
             key={model._id}
           >
-            <a href="#" className="flex h-[200px] w-full items-center justify-center outline-none">
+            <div className="flex h-[200px] w-full items-center justify-center outline-none">
               <img
                 className="rounded-t-lg mt-1 w-fit h-full object-cover"
                 src={model?.imageUrl }
                 alt=""
               />
-            </a>
+            </div>
             <div className="p-5">
-              <a href="#">
+              <div href="#">
                 <h5 className="mb-2 text-2xl tracking-tight text-gray-900 ">
                   {model?.title}
                 </h5>
-              </a>
+              </div>
               <p className="mb-3 font-normal text-gray-500 line-clamp-3">
                 {model?.description}
               </p>

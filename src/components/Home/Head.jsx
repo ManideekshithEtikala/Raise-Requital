@@ -153,10 +153,10 @@ const Head = () => {
         >
           <Link 
             to="/Investor" 
-            className="group relative inline-flex items-center bg-gradient-to-r from-emerald-600 to-emerald-700 text-white px-8 py-3 text-lg font-medium rounded border-0 overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
+            className="group relative inline-flex items-center bg-gradient-to-r from-blue-700 to-blue-800 text-white px-8 py-3 text-lg font-medium rounded border-0 overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
           >
             <span className="relative z-10">Investor</span>
-            <span className="absolute inset-0 bg-gradient-to-r from-emerald-700 to-emerald-800 transform scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100"></span>
+            <span className="absolute inset-0 bg-gradient-to-r from-blue-800 to-blue-900 transform scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100"></span>
             <FiArrowRight className="ml-3 w-5 h-5 relative z-10 transform transition-transform duration-300 group-hover:translate-x-1" />
           </Link>
         </motion.div>
