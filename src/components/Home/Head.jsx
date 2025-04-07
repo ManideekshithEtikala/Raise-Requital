@@ -152,7 +152,7 @@ const Head = () => {
           className="mt-10"
         >
           <Link 
-            to="/Investor" 
+            to="/Investor/Details" 
             className="group relative inline-flex items-center bg-gradient-to-r from-blue-700 to-blue-800 text-white px-8 py-3 text-lg font-medium rounded border-0 overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
           >
             <span className="relative z-10">Investor</span>

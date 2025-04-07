@@ -11,20 +11,20 @@ router.get('/', async (req, res) => {
     res.status(400).json({ message: error.message });
   }
 });
-
-// GET all businesses
 router.get('/:category', async (req, res) => {
-  const {category} = req.params;
   try {
-    const businesses = await Business.find({ businessModel:category
-    });
-    res.status(200).json(businesses);
+    const category = req.params.category;
+    const business = await Business.find({ businessModel: category });
+    res.status(200).json(business);
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
-})
+}
+);
+
 
 // POST a new business
+      
 router.post('/', async (req, res) => {
   const newBusiness = new Business(req.body);
   try {

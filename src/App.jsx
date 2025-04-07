@@ -9,6 +9,9 @@ import HomePage from "./components/Entrepreneur/HomePage.jsx";
 import UserDetials from "./components/Entrepreneur/UserDetials/UserDetials.jsx";
 import IndividualBuisines from "./components/Entrepreneur/components/IndividualBuisines.jsx";
 import ChatPage from './components/Entrepreneur/SocketConnnection/ChatPage.jsx'
+import InvestorDetails from "./components/Investor/UserDetails/InvestorDetials.jsx";
+import Investor from "./components/Investor/Inestors.jsx";
+import IndividualInvestor from "./components/Investor/IndividualInvestor.jsx";
 function App() {
   return (
     <>
@@ -22,6 +25,9 @@ function App() {
                 <Route path="/Entrepreneur" element={<HomePage />} />
                 <Route path="/Entrepreneur/:id" element={<IndividualBuisines />} />
                 <Route path="/chat" element={<ChatPage />} />
+                <Route path="/Investor/Details" element={<InvestorDetails />} />
+                <Route path="/Investor" element={<Investor />} />
+                <Route path="/Investor/:id" element={<IndividualInvestor />} />
               </Routes>
         </BrowserRouter>
       </UserProvider>

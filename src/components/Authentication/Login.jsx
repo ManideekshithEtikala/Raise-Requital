@@ -1,4 +1,4 @@
-import React from 'react'
+
 import { Link } from 'react-router'
 import { useNavigate } from 'react-router'
 const Login = () => {
